@@ -1,7 +1,7 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from ..database import SessionLocal, Base, engine
-from .. import schemas, crud
+from .. import schemas, crud, models
 
 router = APIRouter()
 
@@ -31,6 +31,13 @@ def get_vnet(vnet_id: int, db: Session = Depends(get_db)):
     if not v:
         raise HTTPException(status_code=404, detail="VNet not found")
     return v
+
+@router.get("/search", response_model=schemas.VNetOut)
+def get_vnet_by_cidr(cidr: str, db: Session = Depends(get_db)):
+    vnet = db.query(models.VNet).filter(models.VNet.cidr == cidr).first()
+    if not vnet:
+        raise HTTPException(status_code=404, detail="VNet not found")
+    return vnet
 
 @router.patch("/{vnet_id}", response_model=schemas.VNetOut)
 def update_vnet(vnet_id: int, payload: schemas.VNetUpdate, db: Session = Depends(get_db)):

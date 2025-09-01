@@ -5,6 +5,7 @@ import ipaddress
 class SubnetBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=128)
     cidr: str
+    description: Optional[str] = Field(None, max_length=256)
 
     @field_validator("cidr")
     @classmethod
@@ -22,6 +23,7 @@ class SubnetUpdate(BaseModel):
     id: Optional[int] = None
     name: Optional[str] = None
     cidr: Optional[str] = None
+    description: Optional[str] = Field(None, max_length=256)
 
     @field_validator("cidr")
     @classmethod
@@ -46,6 +48,7 @@ class SubnetOut(SubnetBase):
 class VNetBase(BaseModel):
     name: str = Field(..., min_length=1, max_length=128)
     cidr: str
+    description: Optional[str] = Field(None, max_length=256)
 
     @field_validator("cidr")
     @classmethod
@@ -59,6 +62,7 @@ class VNetCreate(VNetBase):
 class VNetUpdate(BaseModel):
     name: Optional[str] = Field(None, min_length=1, max_length=128)
     cidr: Optional[str] = None
+    description: Optional[str] = Field(None, max_length=256)
     subnets: Optional[List[SubnetUpdate]] = None
 
     @field_validator("cidr")

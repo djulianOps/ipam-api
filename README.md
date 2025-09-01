@@ -54,6 +54,27 @@ Interactive docs available at:
 
 ### 🔑 API Endpoints & Examples
 #### VNets
+| Method | Endpoint             | Description                  |
+|--------|----------------------|------------------------------|
+| GET    | `/vnets`             | List all VNets               |
+| GET    | `/vnets/{id}`        | Get a VNet by ID             |
+| GET    | `/vnets/search?cidr=`| Get a VNet by CIDR           |
+| POST   | `/vnets`             | Create a new VNet            |
+| PUT    | `/vnets/{id}`        | Update a VNet by ID          |
+| DELETE | `/vnets/{id}`        | Delete a VNet by ID          |
+
+#### Subnets
+| Method | Endpoint               | Description                   |
+|--------|------------------------|-------------------------------|
+| GET    | `/subnets`             | List all Subnets              |
+| GET    | `/subnets/{id}`        | Get a Subnet by ID            |
+| GET    | `/subnets/search?cidr=`| Get a Subnet by CIDR          |
+| POST   | `/subnets`             | Create a new Subnet           |
+| PUT    | `/subnets/{id}`        | Update a Subnet by ID         |
+| DELETE | `/subnets/{id}`        | Delete a Subnet by ID         |
+
+---
+#### VNets
 #### ➕ Create VNet
 
 cURL

@@ -9,6 +9,7 @@ class VNet(Base):
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(128), unique=True, nullable=False, index=True)
     cidr = Column(CIDR, nullable=False)
+    description = Column(String(256), nullable=True)
 
     address = Column(String(64))
     netmask = Column(String(64))
@@ -19,13 +20,13 @@ class VNet(Base):
 
     subnets = relationship("Subnet", back_populates="vnet", cascade="all, delete-orphan")
 
-
 class Subnet(Base):
     __tablename__ = "subnets"
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String(128), nullable=False)
     cidr = Column(CIDR, nullable=False)
+    description = Column(String(256), nullable=True)
     vnet_id = Column(Integer, ForeignKey("vnets.id", ondelete="CASCADE"), nullable=False)
 
     address = Column(String(64))
